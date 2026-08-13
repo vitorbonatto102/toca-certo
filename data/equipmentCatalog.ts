@@ -19,6 +19,18 @@ export type EquipmentRecord = {
 };
 
 export const equipmentCatalog: Record<string, EquipmentRecord> = {
+  polyvoxXtd67: {
+    id: "polyvox-xtd-67",
+    category: "Toca-discos",
+    brand: "Polyvox",
+    model: "XTD-67",
+    image: "/equipment/polyvox-xtd67.webp",
+    imageAlt: "Toca-discos Polyvox XTD-67 preto com tampa acrílica",
+    offers: [
+      { store: "Loja oficial", url: "https://www.polyvox.com.br/produtos/toca-disco-belt-drive-polyvox-transmissao-bluetooth-120-240v/", price: "R$ 1.799,10", checkedAt: "12/08/2026", primary: true, note: "Preço no Pix ou boleto consultado na loja oficial" },
+    ],
+    notes: ["Belt drive", "Transmissão Bluetooth", "Cápsula Audio-Technica AT3600L", "Contrapeso e antiskating", "Pré-phono selecionável"],
+  },
   atLp60x: {
     id: "audio-technica-at-lp60x-bk",
     category: "Toca-discos",

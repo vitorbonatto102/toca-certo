@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./PlanTemplate.module.css";
 import type { StoreOffer } from "../../data/equipmentCatalog";
+import type { RecordDiscovery } from "../../data/recordDiscovery";
 
 export type PlanOption = {
   id: string;
@@ -9,6 +10,7 @@ export type PlanOption = {
   price: string;
   priceNote: string;
   verdict: string;
+  operation?: string;
   components: { type: "turntable" | "speakers"; name: string; detail: string; price?: string; image?: string; imageAlt?: string; offers?: StoreOffer[] }[];
   strengths: string[];
   limits: string[];
@@ -32,11 +34,9 @@ export type PlanData = {
   options: PlanOption[];
   whyItWorks: { title: string; copy: string }[];
   connection: string[];
+  connectionNote?: string;
   shoppingNotes: string[];
-  recordDiscovery?: {
-    profile: string;
-    options: { eyebrow: string; title: string; copy: string; url: string; cta: string; affiliate?: boolean }[];
-  };
+  recordDiscovery: RecordDiscovery;
   alternatives: { name: string; total: string; assessment: string; offers?: StoreOffer[] }[];
   upgrades: { phase: string; title: string; copy: string }[];
 };
@@ -114,7 +114,7 @@ export function PlanTemplate({ plan }: { plan: PlanData }) {
 
       <section className={`${styles.card} ${styles.comparison}`} id="recomendacoes">
         <header><div><small>Comparativo rápido</small><h2>Três decisões, não três níveis genéricos</h2></div><p>As estrelas ajudam a comparar prioridades; não são notas absolutas dos produtos.</p></header>
-        <div className={styles.tableWrap}><table><thead><tr><th>Critério</th>{plan.options.map(option => <th key={option.id} className={option.featured ? styles.featuredCell : ""}><span>{option.eyebrow}</span><strong>{option.price}</strong>{option.featured && <em>Recomendada</em>}</th>)}</tr></thead><tbody>{scores.map(([label,key]) => <tr key={key}><th>{label}</th>{plan.options.map(option => <td key={option.id} className={option.featured ? styles.featuredCell : ""}><Stars value={option.scores[key]} /></td>)}</tr>)}<tr><th>Operação</th>{plan.options.map(option => <td key={option.id} className={option.featured ? styles.featuredCell : ""}>{option.id === "manual" ? "Manual" : "Automática"}</td>)}</tr></tbody></table></div>
+        <div className={styles.tableWrap}><table><thead><tr><th>Critério</th>{plan.options.map(option => <th key={option.id} className={option.featured ? styles.featuredCell : ""}><span>{option.eyebrow}</span><strong>{option.price}</strong>{option.featured && <em>Recomendada</em>}</th>)}</tr></thead><tbody>{scores.map(([label,key]) => <tr key={key}><th>{label}</th>{plan.options.map(option => <td key={option.id} className={option.featured ? styles.featuredCell : ""}><Stars value={option.scores[key]} /></td>)}</tr>)}<tr><th>Operação</th>{plan.options.map(option => <td key={option.id} className={option.featured ? styles.featuredCell : ""}>{option.operation ?? (option.id === "manual" ? "Manual" : "Automática")}</td>)}</tr></tbody></table></div>
       </section>
 
       <section className={styles.optionSection}>
@@ -132,7 +132,7 @@ export function PlanTemplate({ plan }: { plan: PlanData }) {
         <article className={`${styles.card} ${styles.connectionCard}`}>
           <header><small>Mapa de conexão</small><h2>Como o sistema será ligado</h2></header>
           <div className={styles.connection}>{plan.connection.map((item,index) => <div key={item}><span>{item}</span>{index < plan.connection.length - 1 && <i>→</i>}</div>)}</div>
-          <p>Use a saída do toca-discos em <b>LINE</b>. Nenhuma das três opções principais precisa de receiver ou pré-phono externo.</p>
+          <p>{plan.connectionNote ?? <>Use a saída do toca-discos em <b>LINE</b>. Nenhuma das três opções principais precisa de receiver ou pré-phono externo.</>}</p>
         </article>
         <article className={`${styles.card} ${styles.checklistCard}`}>
           <header><small>Preços e disponibilidade</small><h2>As condições podem mudar depois da pesquisa</h2></header>
@@ -140,13 +140,13 @@ export function PlanTemplate({ plan }: { plan: PlanData }) {
         </article>
       </section>
 
-      {plan.recordDiscovery && <section className={`${styles.card} ${styles.recordsSection}`}>
+      <section className={`${styles.card} ${styles.recordsSection}`}>
         <header><div><small>Próximos discos para o seu sistema</small><h2>Continue sua coleção com escolhas mais alinhadas ao seu gosto</h2></div><p>{plan.recordDiscovery.profile}</p></header>
         <div className={styles.recordGrid}>{plan.recordDiscovery.options.map(item => <article key={item.title}>
           <span>{item.eyebrow}</span><h3>{item.title}</h3><p>{item.copy}</p><a href={item.url} target="_blank" rel={`noopener noreferrer${item.affiliate ? " nofollow sponsored" : ""}`}>{item.cta} <i>↗</i></a>
         </article>)}</div>
         <small className={styles.affiliateNotice}>Alguns links desta seção podem gerar comissão para o Toca Certo, sem alterar o preço pago por você. As indicações continuam sendo selecionadas conforme seu perfil e preferências.</small>
-      </section>}
+      </section>
 
       <section className={`${styles.card} ${styles.alternatives}`}>
         <header><div><small>Pesquisa ampliada</small><h2>Outras combinações mapeadas</h2></div><p>Servem como plano B para mudança de estoque, preço ou prioridade.</p></header>

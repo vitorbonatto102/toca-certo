@@ -1,0 +1,106 @@
+import type { PlanData } from "../PlanTemplate";
+import { equipmentCatalog } from "../../../data/equipmentCatalog";
+import { createRecordDiscovery } from "../../../data/recordDiscovery";
+
+const polyvoxOffer = equipmentCatalog.polyvoxXtd67.offers;
+
+export const polyvoxDemoPlan: PlanData = {
+  planId: "TC-POLYVOX-01",
+  status: "Projeto demonstrativo",
+  clientName: "um novo ouvinte de vinil",
+  createdAt: "12/08/2026",
+  updatedAt: "12/08/2026",
+  title: "Um sistema Polyvox completo dentro de R$ 3.000",
+  subtitle: "Projeto conceitual para quem busca um primeiro sistema de vinil completo, regulável e pronto para evoluir — sem ultrapassar o orçamento.",
+  profile: [
+    { label: "Objetivo", value: "Montar o primeiro sistema completo" },
+    { label: "Orçamento máximo", value: "R$ 3.000" },
+    { label: "Prioridade", value: "Qualidade, praticidade e identidade visual" },
+    { label: "Evolução", value: "Agulha, cápsula e caixas substituíveis" },
+    { label: "Conectividade", value: "RCA e Bluetooth de saída" },
+    { label: "Tensão", value: "Equipamentos bivolt" },
+  ],
+  recommendationId: "polyvox-completo",
+  whyItWorks: [
+    { title: "Base mais ajustável", copy: "O XTD-67 reúne cápsula Audio-Technica AT3600L, contrapeso e antiskating — recursos importantes para ajuste e evolução." },
+    { title: "Bluetooth de transmissão", copy: "Além da conexão RCA, o XTD-67 pode transmitir o áudio do vinil para caixas ou fones Bluetooth compatíveis — sem confundir com Bluetooth de entrada para celular." },
+    { title: "Dentro do orçamento", copy: "Mesmo reservando R$ 699 para as caixas conceituais, o conjunto estimado fica em R$ 2.498,10 antes do frete." },
+    { title: "Arquitetura simples", copy: "Com pré-phono selecionável no toca-discos e caixas ativas, o sistema dispensa receiver e pré externo para começar." },
+    { title: "Conjunto com identidade", copy: "Toca-discos e caixas compartilham linguagem visual, criando uma solução mais coerente para sala, escritório ou estúdio." },
+  ],
+  connection: ["Polyvox XTD-67 em LINE", "Cabo RCA", "Caixa Polyvox ativa", "Caixa Polyvox secundária"],
+  connectionNote: "A ligação principal recomendada usa a saída LINE e cabo RCA. Como alternativa, o XTD-67 também transmite o áudio do vinil por Bluetooth para caixas ou fones compatíveis, dispensando o cabo de sinal.",
+  shoppingNotes: [
+    "Este é um projeto demonstrativo criado para visualizar uma possível experiência Toca Certo com a Polyvox.",
+    "O XTD-67 e suas características são reais; o par de caixas Polyvox desta simulação ainda é conceitual.",
+    "O valor de R$ 699 para as caixas é apenas uma referência hipotética e não representa anúncio, oferta ou compromisso comercial.",
+    "Preço, estoque, frete e formas de pagamento do toca-discos devem ser confirmados na loja oficial antes da compra.",
+  ],
+  recordDiscovery: createRecordDiscovery("Como este é um projeto demonstrativo e não há briefing musical de um cliente real, as indicações abaixo funcionam como portas de entrada. Em um plano contratado, a curadoria considera artistas, gêneros, discos já adquiridos e lista de desejos."),
+  options: [
+    {
+      id: "entrada",
+      eyebrow: "Entrada enxuta",
+      title: "XTD-67 + caixas compactas",
+      price: "R$ 2.198,10",
+      priceNote: "XTD-67 por R$ 1.799,10 + reserva conceitual de R$ 399 para caixas compactas; frete não incluído.",
+      verdict: "Mostra uma possível porta de entrada mais econômica, priorizando o toca-discos e aceitando menor potência e extensão sonora nas caixas.",
+      operation: "Automática",
+      validation: true,
+      components: [
+        { type: "turntable", name: "Polyvox XTD-67", detail: "Belt drive · AT3600L · Bluetooth de saída", price: "R$ 1.799,10", image: equipmentCatalog.polyvoxXtd67.image, imageAlt: equipmentCatalog.polyvoxXtd67.imageAlt, offers: polyvoxOffer },
+        { type: "speakers", name: "Caixas ativas compactas", detail: "Conceito · bivolt · entrada RCA", price: "R$ 399 (hipotético)" },
+      ],
+      strengths: ["Menor investimento", "Bluetooth de transmissão", "Contrapeso e antiskating", "Margem no orçamento"],
+      limits: ["Caixas apenas conceituais", "Menor potência", "Preço não comercial", "Especificações a definir"],
+      scores: { sound: 5, ease: 5, value: 5, upgrade: 5 },
+    },
+    {
+      id: "polyvox-completo",
+      eyebrow: "Equilíbrio recomendado",
+      title: "XTD-67 + caixas ativas Polyvox",
+      price: "R$ 2.498,10",
+      priceNote: "XTD-67 por R$ 1.799,10 + par de caixas conceitual por R$ 699; frete não incluído.",
+      verdict: "É o conceito mais equilibrado para o limite: preserva os recursos do XTD-67, completa o sistema sem receiver e cria uma experiência visualmente coerente.",
+      operation: "Automática",
+      featured: true,
+      validation: true,
+      setupImage: "/equipment/setup-polyvox-conceito.png",
+      setupImageAlt: "Projeto conceitual de setup completo Polyvox com toca-discos XTD-67 e duas caixas ativas sobre móvel de madeira",
+      components: [
+        { type: "turntable", name: "Polyvox XTD-67", detail: "Belt drive · AT3600L · Bluetooth de saída", price: "R$ 1.799,10", image: equipmentCatalog.polyvoxXtd67.image, imageAlt: equipmentCatalog.polyvoxXtd67.imageAlt, offers: polyvoxOffer },
+        { type: "speakers", name: "Caixas ativas Polyvox", detail: "Conceito · conexão RCA · par estéreo", price: "R$ 699 (hipotético)" },
+      ],
+      strengths: ["Sistema completo", "Bluetooth de transmissão", "Contrapeso e antiskating", "Cápsula substituível"],
+      limits: ["Caixas ainda conceituais", "Preço fictício das caixas", "Frete não calculado", "Especificações finais pendentes"],
+      scores: { sound: 5, ease: 5, value: 5, upgrade: 5 },
+    },
+    {
+      id: "evolutivo",
+      eyebrow: "Reserva para evolução",
+      title: "XTD-67 + caixas de maior porte",
+      price: "R$ 2.898,10",
+      priceNote: "XTD-67 por R$ 1.799,10 + reserva conceitual de R$ 1.099 para caixas mais robustas; frete não incluído.",
+      verdict: "Usa quase todo o orçamento para imaginar caixas com maior potência e presença, mantendo a mesma arquitetura simples e ajustável.",
+      operation: "Automática",
+      validation: true,
+      components: [
+        { type: "turntable", name: "Polyvox XTD-67", detail: "Belt drive · Bluetooth de saída · ajuste de força", price: "R$ 1.799,10", image: equipmentCatalog.polyvoxXtd67.image, imageAlt: equipmentCatalog.polyvoxXtd67.imageAlt, offers: polyvoxOffer },
+        { type: "speakers", name: "Caixas ativas Polyvox Plus", detail: "Conceito · maior potência · controle de volume", price: "R$ 1.099 (hipotético)" },
+      ],
+      strengths: ["Maior potencial sonoro", "Bluetooth de transmissão", "Dentro do teto", "Boa base para upgrades"],
+      limits: ["Produto conceitual", "Preço não comercial", "Menor margem no orçamento", "Projeto sujeito a validação"],
+      scores: { sound: 5, ease: 5, value: 5, upgrade: 5 },
+    },
+  ],
+  alternatives: [
+    { name: "XTD-67 inicialmente sem caixas próprias", total: "R$ 1.799,10", assessment: "Faz sentido para quem já possui caixas ativas compatíveis e quer concentrar o investimento no toca-discos." },
+    { name: "XTD-67 + caixas de outra marca", total: "R$ 2.400–R$ 3.000", assessment: "Mantém o toca-discos Polyvox, mas perde a força visual e comercial de um sistema completo da marca." },
+    { name: "Ecossistema Polyvox completo", total: "R$ 2.498,10", assessment: "Conceito recomendado: solução integrada, fácil de explicar, comprar, instalar e apresentar." },
+  ],
+  upgrades: [
+    { phase: "Agora", title: "Começar com o sistema completo", copy: "Conectar o XTD-67 em LINE diretamente às caixas ativas, realizar o ajuste do braço e começar a ouvir." },
+    { phase: "Depois", title: "Evoluir a leitura do disco", copy: "Experimentar uma agulha compatível superior ou outra cápsula, respeitando os ajustes de força e antiskating." },
+    { phase: "Futuro", title: "Ampliar sem descartar a base", copy: "Migrar para caixas mais capazes ou adicionar pré-phono externo mantendo o XTD-67 como fonte principal." },
+  ],
+};

@@ -16,6 +16,7 @@ const timeline = [
 
 const sceneStarts = timeline.map((_, index) => timeline.slice(0, index).reduce((sum, item) => sum + item.duration, 0));
 const totalDuration = timeline.reduce((sum, item) => sum + item.duration, 0);
+const musicVolume = 0.22;
 type SceneId = "ready" | (typeof timeline)[number]["id"];
 
 function Brand() {
@@ -49,7 +50,7 @@ function Scene({ id, active, children, className = "" }: { id: SceneId; active: 
   return <section className={`${styles.scene} ${styles[id]} ${active ? styles.active : ""} ${className}`} aria-hidden={!active}>{children}</section>;
 }
 
-function OpeningHeaderControls({ elapsed, playing, onToggle, onSkip, onSeek }: { elapsed: number; playing: boolean; onToggle: () => void; onSkip: () => void; onSeek: (index: number) => void }) {
+function OpeningHeaderControls({ elapsed, playing, muted, onToggle, onToggleMute, onSkip, onSeek }: { elapsed: number; playing: boolean; muted: boolean; onToggle: () => void; onToggleMute: () => void; onSkip: () => void; onSeek: (index: number) => void }) {
   const progress = Math.min(100, elapsed / totalDuration * 100);
   const remaining = Math.max(0, Math.ceil((totalDuration - elapsed) / 1000));
   return <div className={styles.headerControls} aria-label="Controles da apresentação">
@@ -58,6 +59,7 @@ function OpeningHeaderControls({ elapsed, playing, onToggle, onSkip, onSeek }: {
       <div className={styles.progressTrack} aria-hidden="true"><i style={{ width: `${progress}%` }} /></div>
       <div className={styles.sceneMarkers}>{timeline.map((item, index) => <button type="button" key={item.id} aria-label={`Ir para ${item.label}`} onClick={() => onSeek(index)} className={elapsed >= sceneStarts[index] ? styles.visited : ""}><i aria-hidden="true" /><span>{item.label}</span></button>)}</div>
     </div>
+    <button className={styles.soundButton} type="button" onClick={onToggleMute} aria-label={muted ? "Ativar música" : "Silenciar música"} aria-pressed={muted}><i aria-hidden="true">{muted ? "×" : "♪"}</i></button>
     <time aria-label={`${remaining} segundos restantes`}>0:{String(remaining).padStart(2, "0")}</time>
     <button className={styles.skipButton} type="button" aria-label="Pular apresentação" onClick={onSkip}><span className={styles.skipText}>Pular apresentação</span><span aria-hidden="true">→</span></button>
   </div>;
@@ -94,9 +96,11 @@ export function PlanStoryTemplate({ plan, planHref }: { plan: PlanData; planHref
   const recommended = useMemo(() => plan.options.find(option => option.id === plan.recommendationId) ?? plan.options[0], [plan]);
   const [started, setStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [finished, setFinished] = useState(false);
   const elapsedRef = useRef(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const scene = started ? currentScene(elapsed) : "ready";
 
   useEffect(() => { elapsedRef.current = elapsed; }, [elapsed]);
@@ -127,14 +131,54 @@ export function PlanStoryTemplate({ plan, planHref }: { plan: PlanData; planHref
 
   useEffect(() => {
     if (!finished) return;
+    const audio = audioRef.current;
+    const fade = window.setInterval(() => {
+      if (!audio) return;
+      audio.volume = Math.max(0, audio.volume - .02);
+      if (audio.volume === 0) audio.pause();
+    }, 90);
     const timeout = window.setTimeout(() => router.push(planHref), 2200);
-    return () => window.clearTimeout(timeout);
+    return () => { window.clearInterval(fade); window.clearTimeout(timeout); };
   }, [finished, planHref, router]);
 
-  const play = () => { setStarted(true); setFinished(false); setPlaying(true); };
-  const openPlan = () => router.push(planHref);
+  const play = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = elapsedRef.current / 1000;
+      audio.volume = musicVolume;
+      audio.muted = muted;
+      void audio.play().catch(() => undefined);
+    }
+    setStarted(true);
+    setFinished(false);
+    setPlaying(true);
+  };
+  const togglePlayback = () => {
+    const audio = audioRef.current;
+    if (playing) audio?.pause();
+    else if (audio) void audio.play().catch(() => undefined);
+    setPlaying(!playing);
+  };
+  const toggleMute = () => {
+    const next = !muted;
+    if (audioRef.current) audioRef.current.muted = next;
+    setMuted(next);
+  };
+  const openPlan = () => {
+    const audio = audioRef.current;
+    if (!audio || audio.paused) { router.push(planHref); return; }
+    const fade = window.setInterval(() => {
+      audio.volume = Math.max(0, audio.volume - .05);
+      if (audio.volume === 0) {
+        window.clearInterval(fade);
+        audio.pause();
+        router.push(planHref);
+      }
+    }, 45);
+  };
   const seek = (index: number) => {
     const next = sceneStarts[index] + 50;
+    if (audioRef.current) audioRef.current.currentTime = next / 1000;
     elapsedRef.current = next;
     setStarted(true);
     setFinished(false);
@@ -144,6 +188,7 @@ export function PlanStoryTemplate({ plan, planHref }: { plan: PlanData; planHref
   const closingSeconds = Math.max(0, Math.ceil((totalDuration - Math.max(elapsed, closingStart)) / 1000));
 
   return <main className={styles.page} data-scene={scene} data-motion="full">
+    <audio ref={audioRef} src="/audio/toca-certo-chill.mp3" preload="auto" loop />
     <ReadyScene plan={plan} active={!started} onPlay={play} onSkip={openPlan}/>
     {started && <>
       <ProfileScene plan={plan} active={scene === "profile"}/>
@@ -151,7 +196,7 @@ export function PlanStoryTemplate({ plan, planHref }: { plan: PlanData; planHref
       <SystemScene plan={plan} option={recommended} active={scene === "system"}/>
       <WhyScene plan={plan} option={recommended} active={scene === "why"}/>
       <ClosingScene plan={plan} active={scene === "closing"} seconds={closingSeconds} onOpen={openPlan}/>
-      <OpeningHeaderControls elapsed={elapsed} playing={playing} onToggle={() => setPlaying(value => !value)} onSkip={openPlan} onSeek={seek}/>
+      <OpeningHeaderControls elapsed={elapsed} playing={playing} muted={muted} onToggle={togglePlayback} onToggleMute={toggleMute} onSkip={openPlan} onSeek={seek}/>
     </>}
     <div className={styles.sceneAnnouncement} aria-live="polite">{started ? timeline.find(item => item.id === scene)?.label : "Seu plano está pronto"}</div>
   </main>;

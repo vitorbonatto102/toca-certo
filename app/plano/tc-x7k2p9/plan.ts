@@ -1,5 +1,6 @@
 import type { PlanData } from "../PlanTemplate";
 import { equipmentCatalog } from "../../../data/equipmentCatalog";
+import { createRecordDiscovery } from "../../../data/recordDiscovery";
 
 export const plan: PlanData = {
   planId: "TC-0001",
@@ -32,26 +33,7 @@ export const plan: PlanData = {
     "Compare o valor final com o frete para o seu CEP — não apenas o preço anunciado.",
     "Se alguma oferta deixar de fazer sentido durante o período de suporte, fale comigo para avaliarmos uma alternativa.",
   ],
-  recordDiscovery: {
-    profile: "Como o gosto musical ainda não foi informado neste caso piloto, estas são portas de entrada gerais. Nos próximos planos, os títulos e as lojas serão selecionados conforme os gêneros, artistas e discos desejados no questionário.",
-    options: [
-      {
-        eyebrow: "Garimpo e catálogo",
-        title: "Vivinil",
-        copy: "Confira discos disponíveis e oportunidades selecionadas para começar ou ampliar sua coleção.",
-        url: "https://vivinil.com.br",
-        cta: "Ver discos na Vivinil",
-      },
-      {
-        eyebrow: "Clube de assinatura",
-        title: "Noize Record Club",
-        copy: "Uma alternativa interessante para descobrir edições especiais e receber novos discos ao longo do ano. Antes de assinar, confira se o catálogo recente combina com o seu gosto.",
-        url: "https://noize-record-club.myshopify.com?invite_code=tkxuoNbmSjV9&referrer_name=4794",
-        cta: "Conhecer a assinatura da Noize",
-        affiliate: true,
-      },
-    ],
-  },
+  recordDiscovery: createRecordDiscovery("Como o gosto musical ainda não foi informado neste caso piloto, estas são portas de entrada gerais. Nos próximos planos, títulos e oportunidades serão selecionados conforme os gêneros, artistas e discos desejados no questionário."),
   options: [
     {
       id: "economico",
