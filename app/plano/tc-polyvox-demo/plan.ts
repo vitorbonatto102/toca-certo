@@ -65,7 +65,7 @@ export const polyvoxDemoPlan: PlanData = {
       operation: "Automática",
       featured: true,
       validation: true,
-      setupImage: "/equipment/setup-polyvox-conceito.png",
+      setupImage: "/equipment/setup-polyvox-conceito.webp",
       setupImageAlt: "Projeto conceitual de setup completo Polyvox com toca-discos XTD-67 e duas caixas ativas sobre móvel de madeira",
       components: [
         { type: "turntable", name: "Polyvox XTD-67", detail: "Belt drive · AT3600L · Bluetooth de saída", price: "R$ 1.799,10", image: equipmentCatalog.polyvoxXtd67.image, imageAlt: equipmentCatalog.polyvoxXtd67.imageAlt, offers: polyvoxOffer },
