@@ -26,6 +26,21 @@ const standardRecordOptions: RecordDiscovery["options"] = [
     cta: "Conhecer a assinatura da Noize",
     affiliate: true,
   },
+  {
+    eyebrow: "Monitor de preços da Amazon",
+    title: "Garimpo Vivinil",
+    copy: "Acompanhe quedas de preço e oportunidades em discos na Amazon reunidas pelo monitor da Vivinil.",
+    url: "https://garimpo.vivinil.com.br/",
+    cta: "Acessar o monitor de preços",
+    affiliate: true,
+  },
+  {
+    eyebrow: "Ofertas em tempo real",
+    title: "Grupo exclusivo de ofertas",
+    copy: "Entre no grupo para receber garimpos, promoções e oportunidades selecionadas para ampliar sua coleção gastando melhor.",
+    url: "https://chat.whatsapp.com/GorsEQei6ltHRFBjrgfD5S",
+    cta: "Entrar no grupo de ofertas",
+  },
 ];
 
 export function createRecordDiscovery(profile: string): RecordDiscovery {

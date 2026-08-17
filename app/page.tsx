@@ -1,4 +1,5 @@
 const CHECKOUT_URL = "https://pay.hotmart.com/N107012543U";
+const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=555591572718&text=Ol%C3%A1%21%20Gostaria%20de%20entrar%20em%20contato%20sobre%20o%20Toca%20Certo&type=phone_number&app_absent=0";
 
 const confusions = [
   ["Pré-amplificação", "O toca-discos já tem pré? Você precisa de um externo ou o receiver resolve?"],
@@ -100,18 +101,22 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="v2-proof v2-shell">
-      <header className="v2-section-head">
-        <span className="v2-number">06</span>
-        <div><span className="v2-overline">Economia que entra no seu plano</span><h2>Comprar certo também é economizar.</h2></div>
-      </header>
-      <div className="v2-proof-grid">
-        <article><h3>Garimpo das melhores condições</h3><p>Pesquiso os equipamentos selecionados em lojas e vendedores confiáveis no momento da criação do seu plano. Comparo preço anunciado, Pix, cartão, frete, voltagem, garantia e itens incluídos.</p><strong>Você recebe referências reais para começar sua compra.</strong></article>
-        <article><h3>O custo do sistema completo</h3><p>Um toca-discos pode parecer barato isoladamente, mas ainda exigir caixas, amplificação, pré-phono, cabos ou adaptadores. O plano considera o investimento total necessário para tudo funcionar.</p><strong>Você sabe quanto precisará investir antes de decidir.</strong></article>
-        <article><h3>Aproveitamento do que você já possui</h3><p>Caixas, receivers, amplificadores e outros equipamentos existentes entram na análise. Quando forem compatíveis e ainda atenderem às suas necessidades, poderão fazer parte do novo sistema.</p><strong>Você não compra novamente aquilo que ainda pode ser bem utilizado.</strong></article>
-        <article><h3>Compra planejada para não gastar duas vezes</h3><p>Se o orçamento não permitir montar tudo imediatamente, o plano pode organizar a compra por etapas e priorizar componentes que continuarão úteis conforme o sistema evoluir.</p><strong>Você começa na sua realidade sem perder de vista o próximo passo.</strong></article>
+    <section className="v2-proof v2-proof-image-section">
+      <div className="v2-proof-art"><img src="/VTSD%20TOCACERTO/economia-plano.webp" alt="Comprar certo também é economizar: garimpo das melhores condições, custo do sistema completo, aproveitamento do que você já possui e compra planejada" width="1774" height="887" loading="lazy" /></div>
+      <div className="v2-proof-mobile">
+        <header>
+          <span>Economia que entra no seu plano</span>
+          <h2>Comprar certo também é economizar.</h2>
+          <p>O Toca Certo ajuda seu orçamento a render melhor com pesquisa, reaproveitamento e escolhas mais inteligentes.</p>
+        </header>
+        <div className="v2-proof-mobile-list">
+          <article><i>01</i><div><h3>Garimpo das melhores condições</h3><p>Comparo preço anunciado, Pix, cartão, frete, voltagem, garantia e itens incluídos.</p><strong>Você recebe referências reais para começar sua compra.</strong></div></article>
+          <article><i>02</i><div><h3>O custo do sistema completo</h3><p>Um toca-discos pode parecer barato isoladamente, mas o sistema inclui caixas, amplificação, pré-phono, cabos e adaptadores.</p><strong>Você sabe quanto precisará investir antes de decidir.</strong></div></article>
+          <article><i>03</i><div><h3>Aproveitamento do que você já possui</h3><p>Caixas, receivers, amplificadores e outros equipamentos existentes entram na análise.</p><strong>Você não compra novamente aquilo que ainda pode ser bem utilizado.</strong></div></article>
+          <article><i>04</i><div><h3>Compra planejada para não gastar duas vezes</h3><p>Se o orçamento pedir, a compra pode ser organizada por etapas para evitar componentes provisórios que logo seriam substituídos.</p><strong>Você começa na sua realidade sem perder de vista o próximo passo.</strong></div></article>
+        </div>
       </div>
-      <div className="v2-proof-cta"><div><strong>Mais do que procurar o menor preço, eu faço seu orçamento trabalhar melhor.</strong><p>O objetivo é encontrar a melhor combinação possível dentro do valor que você pretende investir — aproveitando boas oportunidades e evitando gastos desnecessários.</p></div><a className="v2-inline-cta" href={CHECKOUT_URL}>Quero aproveitar melhor meu orçamento <span>→</span></a></div>
+      <div className="v2-shell v2-proof-cta"><div><strong>Mais do que procurar o menor preço, eu faço seu orçamento trabalhar melhor.</strong><p>O objetivo é encontrar a melhor combinação possível dentro do valor que você pretende investir — aproveitando boas oportunidades e evitando gastos desnecessários.</p></div><a className="v2-inline-cta" href={CHECKOUT_URL}>Quero aproveitar melhor meu orçamento <span>→</span></a></div>
     </section>
 
     <section className="v2-comparison">
@@ -147,5 +152,9 @@ export default function Home() {
     </section>
 
     <section className="v2-final-section"><div className="v2-final v2-shell"><h2>Evite descobrir o que faltava somente depois da compra.</h2><a href={CHECKOUT_URL}>Quero montar o sistema certo <span>→</span></a></div></section>
+    <a className="v2-whatsapp" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Falar com o Toca Certo pelo WhatsApp" title="Falar pelo WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M8.2 7.7c.2-.4.4-.4.7-.4h.4c.2 0 .4.1.5.4l.8 1.8c.1.3.1.5-.1.7l-.6.8c-.2.2-.1.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.2.6 0l.9-1c.2-.2.4-.2.7-.1l1.8.9c.3.1.4.3.4.5 0 .4-.2 1.4-.8 2-.6.6-1.5.9-2.4.7-1.2-.3-2.8-1-4.6-2.6-1.4-1.3-2.4-2.8-2.7-4.1-.3-1.1 0-2.1.4-2.8.4-.6.9-.9 1.4-1Z"/></svg>
+      <span>Fale comigo</span>
+    </a>
   </main>;
 }
