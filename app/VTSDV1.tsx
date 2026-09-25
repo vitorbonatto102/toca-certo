@@ -1,4 +1,4 @@
-const CHECKOUT_URL = "https://pay.hotmart.com/N107012543U";
+const CHECKOUT_URL = "https://pay.hotmart.com/C107758982C";
 
 const doubts = [
   "O toca-discos já possui pré-amplificador?",
