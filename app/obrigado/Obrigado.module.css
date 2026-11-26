@@ -58,7 +58,7 @@
   position: relative;
   width: 360px;
   max-width: 90vw;
-  height: 86px;
+  height: 108px;
   overflow: hidden;
 }
 
@@ -293,7 +293,7 @@
 
   .brandLogo {
     width: 300px;
-    height: 70px;
+    height: 90px;
   }
 
   .brandLogo img {
