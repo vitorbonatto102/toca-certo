@@ -52,8 +52,21 @@ const faqs = [
 export default function Home() {
   return <main className="v2-page" id="topo">
     <section className="v2-hero-simple">
+      <picture>
+        <source media="(max-width: 720px)" srcSet="/VTSD%20TOCACERTO/hero-mobile.webp" />
+        <img
+          className="v2-backdrop v2-hero-backdrop"
+          src="/VTSD%20TOCACERTO/hero-desktop.webp"
+          alt=""
+          width={1448}
+          height={1086}
+          fetchPriority="high"
+        />
+      </picture>
       <div className="v2-shell v2-hero-simple-inner">
-        <figure className="v2-hero-simple-logo"><img src="/VTSD%20TOCACERTO/logo.png" alt="Toca Certo" width="1536" height="1024" fetchPriority="high" /></figure>
+        <figure className="v2-hero-simple-logo">
+          <img src="/VTSD%20TOCACERTO/logo.webp" alt="Toca Certo" width={1140} height={760} />
+        </figure>
         <div className="v2-hero-simple-copy">
           <h1>
             <span>Você não precisa</span>
@@ -66,7 +79,7 @@ export default function Home() {
             <span>já possui. Eu preparo o plano completo para</span>
             <span>seus discos tocarem do jeito <strong>certo.</strong></span>
           </p>
-          <a className="v2-button" href={CHECKOUT_URL}>Quero montar meu sistema certo <span>→</span></a>
+          <a className="v2-button" href={CHECKOUT_URL} data-cta="principal">Quero montar meu sistema certo <span>→</span></a>
           <small className="v2-hero-simple-meta">Pagamento único de R$ 67 <i>·</i> Tudo online</small>
         </div>
       </div>
@@ -91,6 +104,15 @@ export default function Home() {
         </div>
         <strong className="v2-contrast-conclusion">O Toca Certo ajuda você a descobrir o sistema completo que faz sentido para seu espaço, orçamento e forma de ouvir música.</strong>
         <div className="v2-solution-intro">
+          <img
+            className="v2-backdrop"
+            src="/VTSD%20TOCACERTO/sistema-na-sala.webp"
+            alt=""
+            width={1200}
+            height={675}
+            loading="lazy"
+            decoding="async"
+          />
           <div><span className="v2-overline">É aqui que entra o Toca Certo</span><h2>Você me conta sua realidade.<br/>Eu organizo a decisão inteira.</h2></div>
           <div><p>Você informa seu espaço, orçamento, maneira de ouvir música e o que já possui. A partir disso, eu preparo um plano completo do sistema que faz sentido para você — incluindo o que comprar, o que reaproveitar e o que pode esperar.</p><a className="v2-inline-cta" href={CHECKOUT_URL}>Quero receber minha recomendação <span>→</span></a></div>
         </div>
@@ -111,7 +133,19 @@ export default function Home() {
           <span className="v2-number">05</span>
           <div><h2>Você recebe uma página exclusiva com seu plano completo.</h2></div>
         </header>
-        <figure className="v2-section-art v2-practice-art"><img src="/VTSD%20TOCACERTO/4.png" alt="Exemplo da página personalizada do Toca Certo aberta em computador e celular" width="1448" height="1086" loading="lazy" /><figcaption>Exemplo ilustrativo da página individual entregue ao cliente.</figcaption></figure>
+        <figure className="v2-section-art v2-practice-art">
+          <img
+            src="/VTSD%20TOCACERTO/demonstracao.webp"
+            srcSet="/VTSD%20TOCACERTO/demonstracao-mobile.webp 720w, /VTSD%20TOCACERTO/demonstracao.webp 1200w"
+            sizes="(max-width: 720px) calc(100vw - 36px), min(100vw - 88px, 1298px)"
+            alt="Exemplo da página personalizada do Toca Certo aberta em computador e celular"
+            width={1200}
+            height={743}
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Exemplo ilustrativo da página individual entregue ao cliente.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -142,13 +176,35 @@ export default function Home() {
 
     <section className="v2-delivery v2-shell">
       <header className="v2-section-head"><span className="v2-number">08</span><div><h2>Um projeto para comprar, conectar e evoluir.</h2><p>Toda a análise técnica e a pesquisa de equipamentos reunidas em um material feito para seu ambiente, seu orçamento e sua forma de ouvir música.</p></div></header>
-      <figure className="v2-section-art v2-delivery-art"><img src="/VTSD%20TOCACERTO/7.png" alt="Visão dos entregáveis do Toca Certo: diagnóstico, página exclusiva, opções de setup, mapa de compra, conexão e justificativas" width="1448" height="1086" loading="lazy" /></figure>
+      <figure className="v2-section-art v2-delivery-art">
+        <img
+          src="/VTSD%20TOCACERTO/entregaveis.webp"
+          srcSet="/VTSD%20TOCACERTO/entregaveis-mobile.webp 720w, /VTSD%20TOCACERTO/entregaveis.webp 1200w"
+          sizes="(max-width: 720px) calc(100vw - 36px), min(100vw - 88px, 1298px)"
+          alt="Visão dos entregáveis do Toca Certo: diagnóstico, página exclusiva, opções de setup, mapa de compra, conexão e justificativas"
+          width={1200}
+          height={752}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
       <div className="v2-delivery-grid">{deliverables.map(([title, copy], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
     </section>
 
     <section className="v2-about">
       <div className="v2-shell v2-about-grid">
-        <figure className="v2-about-photo"><img src="/VTSD%20TOCACERTO/8.png" alt="Vitor segurando um disco de vinil" width="1024" height="1536" loading="lazy" /></figure>
+        <figure className="v2-about-photo">
+          <img
+            src="/VTSD%20TOCACERTO/vitor.webp"
+            srcSet="/VTSD%20TOCACERTO/vitor-mobile.webp 720w, /VTSD%20TOCACERTO/vitor.webp 900w"
+            sizes="(max-width: 720px) calc(100vw - 36px), 450px"
+            alt="Vitor segurando um disco de vinil"
+            width={900}
+            height={1200}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
         <div className="v2-about-copy"><span className="v2-number">09</span><span className="v2-overline">Oi, eu sou o Vitor</span><h2>Minha relação com o áudio começou muito antes do Toca Certo.</h2><p>Cresci próximo desse universo porque meu pai era marceneiro e construía caixas de som. Desde cedo, áudio deixou de ser apenas uma forma de ouvir música e passou a despertar minha curiosidade.</p><p>Mais tarde, estudei Engenharia Acústica durante três anos, aprofundando meu conhecimento sobre som, reprodução e funcionamento de sistemas de áudio.</p><p>Ao trabalhar diariamente com discos por meio da Vivinil, percebi que quem começa no vinil encontra muitas recomendações isoladas e pouca orientação para montar um sistema completo dentro da própria realidade. O Toca Certo nasceu para transformar pesquisa e conhecimento técnico em uma recomendação clara, prática e personalizada.</p></div>
       </div>
     </section>
@@ -164,7 +220,21 @@ export default function Home() {
       <div className="v2-faq v2-shell"><header><span className="v2-number">11</span><span className="v2-overline">Perguntas frequentes</span><h2>O que ainda precisa ficar claro?</h2></header><div>{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span>+</span></summary><p>{answer}</p></details>)}</div></div>
     </section>
 
-    <section className="v2-final-section"><div className="v2-final v2-shell"><h2>Evite descobrir que faltava algo tarde demais.</h2><a href={CHECKOUT_URL}>Quero montar o sistema certo <span>→</span></a></div></section>
+    <section className="v2-final-section">
+      <img
+        className="v2-backdrop"
+        src="/VTSD%20TOCACERTO/cta-final-equipamentos.webp"
+        alt=""
+        width={1400}
+        height={467}
+        loading="lazy"
+        decoding="async"
+      />
+      <div className="v2-final v2-shell">
+        <h2>Evite descobrir que faltava algo tarde demais.</h2>
+        <a href={CHECKOUT_URL}>Quero montar o sistema certo <span>→</span></a>
+      </div>
+    </section>
     <footer className="v2-bempronto-credit">
       <a href="https://bempronto.vercel.app/" target="_blank" rel="noopener noreferrer">Site por BemPronto ↗</a>
     </footer>

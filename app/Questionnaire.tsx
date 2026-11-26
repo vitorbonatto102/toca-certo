@@ -4,6 +4,7 @@ import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 type Answers = Record<string, string | string[]>;
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/vitor_bonatto@hotmail.com";
+const FORM_URL = "https://toca-certo.vercel.app/questionario";
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 
 const initial: Answers = {
@@ -113,20 +114,24 @@ export function Questionnaire() {
           const formatted = Array.isArray(value) ? value.join(", ") : value.trim();
           if (formatted) formData.append(labels[key] ?? key, formatted);
         });
-        formData.append("email", get("email").trim());
         formData.append("_replyto", get("email").trim());
         formData.append("_subject", `Novo diagnóstico Toca Certo — ${get("name").trim()}`);
         formData.append("_template", "table");
+        formData.append("_url", FORM_URL);
         formData.append("Resumo completo", summary);
         files.forEach(file => formData.append("attachment", file, file.name));
 
         const response = await fetch(FORM_ENDPOINT, { method: "POST", headers: { Accept: "application/json" }, body: formData });
         const result = await response.json().catch(() => null);
-        if (!response.ok || result?.success === false || result?.success === "false") throw new Error("Falha no envio");
+        if (!response.ok || result?.success === false || result?.success === "false") {
+          const providerMessage = typeof result?.message === "string" ? result.message : "";
+          throw new Error(providerMessage || `Falha no envio (${response.status})`);
+        }
 
         setDone(true);
         localStorage.removeItem("setup-vinil-form");
-      } catch {
+      } catch (submissionError) {
+        console.error("Falha ao enviar o questionário:", submissionError);
         setError("Não conseguimos enviar agora. Suas respostas continuam salvas neste dispositivo. Tente novamente em alguns instantes.");
       } finally {
         setSubmitting(false);

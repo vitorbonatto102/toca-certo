@@ -22,11 +22,10 @@ export default function ObrigadoPage() {
 
       <section className={styles.shell}>
         <header className={styles.brand}>
-          <img src="/icon.png" alt="" width="54" height="54" />
-          <div>
-            <strong>Toca Certo</strong>
-            <span>Plano personalizado para seu sistema de vinil</span>
+          <div className={styles.brandLogo}>
+            <img src="/toca-certo-logo.png" alt="Toca Certo" width="1018" height="1018" />
           </div>
+          <span>Plano personalizado para seu sistema de vinil</span>
         </header>
 
         <div className={styles.hero}>
